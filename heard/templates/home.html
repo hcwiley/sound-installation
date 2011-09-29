@@ -1,0 +1,13 @@
+{% extends 'default.html' %}
+{% block container %}
+<div id='all-sounds'>
+{% for a in artists %}
+    <h3>{{ a.nickname }}</h3>
+	<ul>
+    {% for s in a.piece_set.all %}
+<li><a href='{{ s.slug }}'>{{ s }}</a></li>
+    {% endfor %}
+	</ul>
+{% endfor %}
+</div>
+{% endblock %}

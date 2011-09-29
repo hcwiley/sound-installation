@@ -1,0 +1,49 @@
+{% extends 'default.html' %}
+{% block google_map %}
+	<div id="map_canvas" style="width:100%; height:100%">
+	</div>
+{% endblock %}
+        	{% block container %}
+        <script type='text/javascript'>         
+            		  initialize({{ sound.location.lat }},{{ sound.location.long }});          
+                    
+        </script>
+        <div id='main'>
+            <div id='current'>
+                <iframe style='display:none;' src='{{ sound.sounds }}' controls='controls'>
+                    {{ s }}
+                </iframe>
+                <div class='info'>
+                	<div class='filler'></div>
+                    <div class='text'>
+                        <h2 style='font-style: italic;'>{{ sound }}</h2>
+                        <h3><span style='font-variant:small-caps; font-size: .9em;'>by:</span> {{ sound.artist }}</h3>
+                        <p>
+                            {{ sound.description }}
+                        </p>
+                    </div>
+                    {% if sound.default_image.thumb != None %}<img src='{{ sound.default_image.thumb }}'/>{% endif %}
+                </div>
+            </div>
+            <!--
+            <div id='other-sounds'>
+            {% for s in sounds %}
+            <div>
+            <p>
+            {{ s }}
+            </p>
+            <iframe style='display:none;' src='{{ sound.sounds }}' controls='controls'>
+            {{ s }}
+            </iframe>
+            <div class='image'>
+            <h2>{{ sound }}</h2>
+            <img src='{{ sound.default_image.thumb }}'/>
+            <p>
+            {{ sound.description }}
+            </p>
+            </div>
+            </div>
+            {% endfor %}
+            </div>
+            !-->
+			{% endblock %}

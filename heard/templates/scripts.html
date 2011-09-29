@@ -1,0 +1,32 @@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js">
+</script>
+<link type='text/css' rel='stylesheet' href='{{ STATIC_URL }}css/styles.css'/>
+<script type="text/javascript" src="{{ STATIC_URL }}js/main.js">
+</script>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+<script type="text/javascript">
+	function done(event){
+		console.log(event.latLng.Ka);
+		$('#marker-feed-back').data('new',true);
+		$('#marker-feed-back').data('lat',event.latLng.Ja);
+		$('#marker-feed-back').data('long',event.latLng.Ka);
+	}
+    function initialize(lat, long){
+        var latlng = new google.maps.LatLng(lat, long);
+        var myOptions = {
+            zoom: 24,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.HYBRID
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        var sound1 = new google.maps.Marker({
+            position: latlng,
+            map: map,
+			draggable: true,
+        });
+	    google.maps.event.addListener(sound1, 'dragend', done);
+		google.maps.event.addListener(sound1, 'click', done);
+    }
+</script>

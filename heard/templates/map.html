@@ -1,0 +1,13 @@
+{% extends 'default.html' %}
+{% block google_map %}
+<div id="map_canvas" style="width:100%; height:100%">
+</div>
+{% endblock %}
+{% block container %}
+<script type='text/javascript'>         
+    initialize(30.414122981729275, -91.17732620239258);        
+</script>
+<div id='marker-feed-back' class='rounded-corners-all filler'>
+    <p></p><p></p>
+</div>
+{% endblock %}
