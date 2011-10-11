@@ -8,12 +8,13 @@
 </script>
 <script type="text/javascript">
 	function done(event){
-		console.log(event.latLng.Ka);
+		console.log(event);
+		console.log(event.latLng);
 		$('#marker-feed-back').data('new',true);
 		$('#marker-feed-back').data('lat',event.latLng.Ja);
 		$('#marker-feed-back').data('long',event.latLng.Ka);
 	}
-    function initialize(lat, long){
+    function initialize(lat, long, draggable){
         var latlng = new google.maps.LatLng(lat, long);
         var myOptions = {
             zoom: 24,
@@ -24,7 +25,7 @@
         var sound1 = new google.maps.Marker({
             position: latlng,
             map: map,
-			draggable: true,
+			draggable: draggable,
         });
 	    google.maps.event.addListener(sound1, 'dragend', done);
 		google.maps.event.addListener(sound1, 'click', done);

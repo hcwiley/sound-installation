@@ -37,7 +37,7 @@ function init(){
         $(document).mouseup(function(event){
             if ($('#marker-feed-back').data('new')) {
                 $('#marker-feed-back').data('new', false);
-                console.log($('#marker-feed-back').data('lat'));
+//                console.log($('#marker-feed-back').data('lat'));
                 $('#marker-feed-back p:first').text($('#marker-feed-back').data('lat'));
                 $('#marker-feed-back p:last').text($('#marker-feed-back').data('long'));
                 jingleAnimate('#marker-feed-back', event.pageX + 40, event.pageY - 70);
