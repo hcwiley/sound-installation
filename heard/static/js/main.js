@@ -1,6 +1,11 @@
 jQuery.event.add(window, 'load', init);
 
 var loc;
+var cc=0;
+var latlng;
+var myOptions;
+var map;
+var sound;
 
 function jingleAnimate(id, x, y){
     var time = 2000;

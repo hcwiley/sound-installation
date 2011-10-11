@@ -11,7 +11,7 @@ import Image
 class MyImage(models.Model):
     image = models.ImageField(upload_to='gallery/')
     thumb = models.ImageField(upload_to='gallery/', blank=True, null=True, editable=False)
-    thumbsize = (300,300)
+    thumbsize = (50,50)
     
     class Meta:
         ordering = ['image']
@@ -46,6 +46,9 @@ class Location(models.Model):
     lat = models.FloatField(null=True, blank=True)
     long = models.FloatField(null=True, blank=True)
 #    geotag = 
+
+    def __unicode__(self):
+        return '%s, %s' % (self.lat, self.long)
 
 class Piece(models.Model):
     title = models.CharField(max_length=400)

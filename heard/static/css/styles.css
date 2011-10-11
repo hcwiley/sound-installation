@@ -112,6 +112,36 @@ div.info > img {
 	line-height: 10px;
 }
 
+.marker-feed-back{
+    position: fixed;
+    z-index: 100;
+    left: -300px;
+    top: -100px;
+    width: 150px;
+    height: 100px;
+    opacity: .8;
+    background-color: #333;
+    overflow: hidden;
+    padding-left: 5px;
+    -moz-box-shadow: -15px 5px 20px #333;
+    -webkit-box-shadow: -15px 5px 20px #333;
+    box-shadow: -15px 5px 20px #333;
+    /* For IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+    /* For IE 5.5 - 7 */
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+
+}
+.marker-feed-back > *, .marker-feed-back > * > *{
+    display: block;
+    position: relative;
+    font-size: 1em;
+    top: -5px;
+    left: 5px;
+    color: #FFF;
+    line-height: 10px;
+}
+
 .rounded-corners-all {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;

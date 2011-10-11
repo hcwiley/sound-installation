@@ -7,27 +7,35 @@
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true">
 </script>
 <script type="text/javascript">
-	function done(event){
-		console.log(event);
-		console.log(event.latLng);
-		$('#marker-feed-back').data('new',true);
-		$('#marker-feed-back').data('lat',event.latLng.Ja);
-		$('#marker-feed-back').data('long',event.latLng.Ka);
-	}
+    function done(event){
+        $('#marker-feed-back').data('new', true);
+        $('#marker-feed-back').data('lat', event.latLng.Ma);
+        $('#marker-feed-back').data('long', event.latLng.Na);
+    }
+    
     function initialize(lat, long, draggable){
-        var latlng = new google.maps.LatLng(lat, long);
-        var myOptions = {
-            zoom: 24,
-            center: latlng,
+        var ll = new google.maps.LatLng(lat, long);
+        myOptions = {
+            zoom: 16,
+            center: ll,
             mapTypeId: google.maps.MapTypeId.HYBRID
         };
-        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-        var sound1 = new google.maps.Marker({
-            position: latlng,
+        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+		sound1 = new google.maps.Marker({
+            position: ll,
             map: map,
-			draggable: draggable,
+            draggable: draggable,
         });
-	    google.maps.event.addListener(sound1, 'dragend', done);
-		google.maps.event.addListener(sound1, 'click', done);
+        google.maps.event.addListener(sound1, 'dragend', done);
+        google.maps.event.addListener(sound1, 'click', done);
+    }
+    
+    function addNewMarker(lat, long, draggable){
+		var ll = new google.maps.LatLng(lat, long);
+        sound = new google.maps.Marker({
+            position: ll,
+            map: map,
+            draggable: draggable,
+        });
     }
 </script>
