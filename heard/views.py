@@ -164,6 +164,7 @@ def add_piece(request):
         print artist
         piece.artist = artist
         piece.save()
+        piece = Piece.objects.get(title=title)
         page = 'sounds.html'
         args = {
             'STATIC_URL' : settings.STATIC_URL,
