@@ -8,9 +8,17 @@
     initialize(30.414122981729275, -91.17732620239258, true);        
 </script>
 <div id='marker-feed-back' class='rounded-corners-all filler'>
-    <p></p><p></p>
+	<form name='piece_form' method='post' action='/add-piece' enctype='multipart/form-data'>
+		{%  csrf_token %}
+	<p>Title</p>
+	{{ piece_form.title }}
+	<p>Image</p>
+    {{ piece_form.default_image }}
+	<p>Sound</p>
+    {{ piece_form.sounds }}
+    <input name='lat' id='lat' class='hidden' type='text' />
+	<input name='long' id='long' class='hidden' type='text' />
+	<input name='submit' type='submit' value='submit' class='submit'/>
+	</form>
 </div>
 {% endblock %}
-<h1>not sure waht to make upf this one. doesn't show the time increasing...</h1>
-
-<ok>

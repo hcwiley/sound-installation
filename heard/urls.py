@@ -24,6 +24,16 @@ urlpatterns += patterns('',
         (r'%s(?P<path>.*)$' % settings.GALLERY_URL, 'django.views.static.serve', {'document_root': settings.GALLERY_ROOT}),
         (r'^%s*/(?P<path>.*)$' % settings.STATIC_URL, 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 )
+
+#Login
 urlpatterns += patterns('',
+    (r'^login$', 'views.login'),
+    (r'^logout$', 'views.logout'),
+)
+
+urlpatterns += patterns('',
+    (r'^add-piece$', 'views.add_piece'),
+    (r'^edit$', 'views.edit', {'page':'home'}),
+    (r'^edit/(?P<page>.*)$', 'views.edit'),
     (r'^(?P<page>.*)$', 'views.default'), # make sure this is last as it will catch everything
 )

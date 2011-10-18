@@ -41,6 +41,8 @@ class Sound(models.Model):
     
     def __unicode__(self):
         return self.file.url
+class SoundForm(forms.FileField):
+    file = forms.FileField(widget=forms.FileInput(), required=False)
     
 class Location(models.Model):
     lat = models.FloatField(null=True, blank=True)
@@ -67,6 +69,8 @@ class Piece(models.Model):
         super(Piece, self).save(*args, **kwargs)
     
 class PieceForm(forms.ModelForm):
+    default_image = forms.ImageField(widget=forms.FileInput(), required=False)
+    sounds = SoundForm()
     class Meta:
         model = Piece
 

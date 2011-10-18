@@ -43,8 +43,8 @@ function init(){
             if ($('#marker-feed-back').data('new')) {
                 $('#marker-feed-back').data('new', false);
 //                console.log($('#marker-feed-back').data('lat'));
-                $('#marker-feed-back p:first').text($('#marker-feed-back').data('lat'));
-                $('#marker-feed-back p:last').text($('#marker-feed-back').data('long'));
+                $('#lat').val($('#marker-feed-back').data('lat'));
+                $('#long').val($('#marker-feed-back').data('long'));
                 jingleAnimate('#marker-feed-back', event.pageX + 40, event.pageY - 70);
             }
         });

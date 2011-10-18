@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+        <meta name='description' content='' />
+        <meta name='keywords' content='' />
+        {% include "scripts.html" %}
+    </head>
+    <body>
+        <div id='container'>
+            <div id='login'>
+                <form name='login' method='POST' id='login-form' action='/login'>
+                    {%  csrf_token %}
+                    <p>
+                        handle:
+                    </p>
+                    <input type='text' name='username' id='username' value='' />
+                    <br/>
+                    <p>
+                        password:
+                    </p>
+                    <input type='password' name='password' id='password' value='' /><input type='submit' />
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
