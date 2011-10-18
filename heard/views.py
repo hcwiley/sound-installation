@@ -164,8 +164,17 @@ def add_piece(request):
         print artist
         piece.artist = artist
         piece.save()
-
-        return HttpResponse("success")
+        page = 'sounds.html'
+        args = {
+            'STATIC_URL' : settings.STATIC_URL,
+            'base_template' : "default.html",
+            'artists' : Artist.objects.all(),
+            'sounds' : Piece.objects.all(),
+            'sound' : piece,
+            'page': page,
+        }
+        args.update(csrf(request))
+        return render_to_response('sounds.html', args)
     except:
         print 'bad form'
         return HttpResponseNotFound("invalid form")
