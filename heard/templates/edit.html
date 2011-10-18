@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+        <meta name='description' content='' />
+        <meta name='keywords' content='' />
+        {% include "scripts.html" %}
+    </head>
+    <body>
+        {% block google_map %}
+        {% endblock %}
+        <div id='container'>
+            {% block container %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
