@@ -153,18 +153,11 @@ def add_piece(request):
         piece.location = loc
         print piece.location
         if img != '':
-            print 'theres an image...'
-            image = Image.objects.create()
-            image.image = img
-            print image
-            img.save()
-            piece.default_image = img
+            image = Image.objects.create(image=img)
+            image.save()
+            piece.default_image = image
         if sound != '':
-            print 'theres a sound'
             sounds = Sound.objects.create(file=sound)
-            print sounds
-#            sounds.file = sound
-            print sounds.file
             sounds.save()
             piece.sounds = sounds
         artist = Artist.objects.get(user=User.objects.get(username=request.user))

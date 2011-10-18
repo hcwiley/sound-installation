@@ -8,15 +8,15 @@ from django.contrib.auth.models import User
 
 class Artist(models.Model):
     user = models.ForeignKey(User, unique=True)
-    nickname = models.CharField(max_length=400)
+    name = models.CharField(max_length=400, default='')
 
     
     def __unicode__(self):
         return slugify(self.user)
         
     def save(self, *args, **kwargs):
-        if(self.nickname == None):
-            self.nickname = '%s %s' % (self.user.first_name, self.user.last_name)
+        if(self.name == None):
+            self.name = '%s %s' % (self.user.first_name, self.user.last_name)
         super(Artist, self).save(*args, **kwargs)
 
 admin.site.register(Artist)

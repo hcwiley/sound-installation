@@ -60,6 +60,7 @@ class Piece(models.Model):
     description = models.TextField(null=True, blank=True)
     artist = models.ForeignKey(Artist, null=True, blank=True)
     location = models.ForeignKey(Location, null=True, blank=True)
+    show_map = models.BooleanField(default=True)
     
     def __unicode__(self):
         return self.title

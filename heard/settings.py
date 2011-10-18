@@ -22,7 +22,7 @@ AUDIO_URL = '/sounds/'
 
 
 ADMIN_MEDIA_PREFIX = os.path.join(STATIC_URL, 'admin/')
-sys.path.append(PROJECT_ROOT)
+sys.path.append('%s/' % PROJECT_ROOT)
 sys.path.append('%s/apps/' % PROJECT_ROOT)
 sys.path.append('%s/apps/artist/' % PROJECT_ROOT)
 sys.path.append('%s/apps/piece/' % PROJECT_ROOT)
@@ -99,6 +99,7 @@ INSTALLED_APPS = (
     # everything above needed for admin
     'django.contrib.localflavor',
     'django.contrib.staticfiles',
+    'south',
     'artist',
     'piece',
 )
