@@ -153,7 +153,7 @@ def add_piece(request):
         piece.location = loc
         print piece.location
         if img != '':
-            image = Image.objects.create(image=img)
+            image = MyImage.objects.create(image=img)
             image.save()
             piece.default_image = image
         if sound != '':
