@@ -63,9 +63,9 @@ class Piece(models.Model):
     location = models.ForeignKey(Location, null=True, blank=True)
     show_map = models.BooleanField(default=True)
     use_street_view = models.BooleanField(default=True)
-    heading = models.FloatField(default=180.0)
-    pitch = models.FloatField(default=0.0)
-    zoom = models.FloatField(default=1)
+    heading = models.FloatField(default=180.0,editable=False)
+    pitch = models.FloatField(default=0.0,editable=False)
+    zoom = models.FloatField(default=1,editable=False)
     activation_code = models.CharField(max_length=3, default='000', editable=False)
     
     def __unicode__(self):
@@ -73,8 +73,8 @@ class Piece(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        if self.activation_code is '000' or self.activation_code is '0':
-            self.activation_code = '%s%s%s' % (random.randint(0,9),random.randint(0,9),random.randint(0,9))    
+        if self.activation_code == '000' or self.activation_code == '0':
+            self.activation_code = '%s%s%s' % (random.randint(0,9),random.randint(0,9),random.randint(0,9))
         super(Piece, self).save(*args, **kwargs)
     
 class PieceForm(forms.ModelForm):

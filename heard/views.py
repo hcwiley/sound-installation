@@ -146,8 +146,9 @@ def add_piece(request):
         piece = Piece.objects.create()
         title = request.POST['title']
         piece.title = title
-        description = request.POST['description']
-        piece.description = description
+        if request.POST['description'] != '':
+            description = request.POST['description']
+            piece.description = description
         loc = Location.objects.create()
         loc.lat = lat
         loc.long = long
@@ -163,7 +164,6 @@ def add_piece(request):
             sounds.save()
             piece.sounds = sounds
         artist = Artist.objects.get(user=User.objects.get(username=request.user))
-        print artist
         piece.artist = artist
         piece.save()
         piece = Piece.objects.get(title=title)
