@@ -63,9 +63,9 @@ class Piece(models.Model):
     location = models.ForeignKey(Location, null=True, blank=True)
     show_map = models.BooleanField(default=True)
     use_street_view = models.BooleanField(default=True)
-    heading = models.FloatField(default=180.0,editable=False)
-    pitch = models.FloatField(default=0.0,editable=False)
-    zoom = models.FloatField(default=1,editable=False)
+    heading = models.FloatField(default=180.0)
+    pitch = models.FloatField(default=0.0)
+    zoom = models.FloatField(default=1)
     activation_code = models.CharField(max_length=3, default='000', editable=False)
     
     def __unicode__(self):
