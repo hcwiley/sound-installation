@@ -99,7 +99,7 @@ INSTALLED_APPS = (
     # everything above needed for admin
     'django.contrib.localflavor',
     'django.contrib.staticfiles',
-    'south',
+#    'south',
     'artist',
     'piece',
 )
