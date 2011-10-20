@@ -36,6 +36,51 @@ div.filler {
 	height: 100%;
 }
 
+div.activation {
+    position: fixed;
+    top: 35%;
+    left: 35%;
+    z-index: 100;
+    width: 400px;
+    height: 80px;
+    opacity: 1;
+	background-color: #CCC;
+    opacity: .9;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px #ededed;
+	text-align: center;
+}
+
+div.activation > div > *{
+    color: #222;
+	margin: 5px;
+	opacity: 1;
+	text-align: center;
+}
+
+#sound.hidden{
+	display: none;
+}
+
+#street_view{
+	position: absolute;
+	right: 40px;
+	top: 40px;
+	z-index: 5;
+}
+
+#street_view input{
+	display: none;
+}
+#street_view button{
+    display: inline;
+}
+
+#map_canvas{
+	z-index: 1;
+}
 
 div.text {
     position: absolute;
@@ -91,7 +136,7 @@ div.info > img {
 	z-index: 100;
 	left: -700px;
 	top: -600px;
-	width: 170px;
+	width: 420px;
 	height: 200px;
 	opacity: .8;
 	background-color: #333;
@@ -115,10 +160,15 @@ div.info > img {
 	left: 5px;
 	color: #FFF;
 	line-height: 10px;
+	float: left;
 }
 
+#marker-feed-back p{
+	width: 100px;
+}
 input{
 	color: #FFF;
+	width: 190px;
 }
 
 .submit{
@@ -135,14 +185,28 @@ input.hidden{
 	color: #000;
 }
 
+#description{
+	float: right;
+	position: relative;
+	left: 10px;
+	width: 190px;
+}
+
+#id_description{
+    width: inherit;
+	height: 160px;
+}
+
+
 .marker-feed-back{
     position: fixed;
     z-index: 100;
     left: -300px;
     top: -100px;
-    width: 150px;
-    height: 100px;
-    opacity: .8;
+    width: auto;
+    height: auto;
+	padding: 0px 15px;
+    opacity: .9;
     background-color: #333;
     overflow: hidden;
     padding-left: 5px;
@@ -158,7 +222,10 @@ input.hidden{
 .marker-feed-back > *, .marker-feed-back > * > *{
     display: block;
     position: relative;
-    font-size: 1em;
+	width: auto;
+	clear: both;
+    font-size: 1.1em;
+	font-weight: 500;
     top: -5px;
     left: 5px;
     color: #FFF;

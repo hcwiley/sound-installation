@@ -19,10 +19,11 @@ def edit(request, page):
             page = 'sounds.html'
             args = {
                 'STATIC_URL' : settings.STATIC_URL,
-                'base_template' : "default.html",
+                'base_template' : "edit.html",
                 'artists' : Artist.objects.all(),
                 'sounds' : Piece.objects.all(),
                 'sound' : piece,
+                'sound_form' : PieceForm(instance=piece),
                 'page': page,
             }
             args.update(csrf(request))
@@ -34,7 +35,7 @@ def edit(request, page):
         if page in all_pages:
             args = {
                     'STATIC_URL' : settings.STATIC_URL,
-                    'base_template' : "default.html",
+                    'base_template' : "edit.html",
                     'artists' : Artist.objects.all(),
                     'sounds' : Piece.objects.all(),
                     'piece_form' : PieceForm(),
@@ -143,9 +144,10 @@ def add_piece(request):
         if 'default_image' in request.FILES:
             img = request.FILES['default_image']
         piece = Piece.objects.create()
-        print piece
         title = request.POST['title']
         piece.title = title
+        description = request.POST['description']
+        piece.description = description
         loc = Location.objects.create()
         loc.lat = lat
         loc.long = long
@@ -176,6 +178,21 @@ def add_piece(request):
         }
         args.update(csrf(request))
         return render_to_response('sounds.html', args)
+    except:
+        print 'bad form'
+        return HttpResponseNotFound("invalid form")
+    
+def save_street(request):
+    if request.method != "POST":
+        raise Http404
+    try:
+        sound = Piece.objects.get(title=request.POST['title'])
+        print sound
+        sound.heading = request.POST['heading']
+        sound.pitch = request.POST['pitch']
+        sound.zoom = request.POST['zoom']
+        sound.save()
+        return HttpResponse("big score")
     except:
         print 'bad form'
         return HttpResponseNotFound("invalid form")

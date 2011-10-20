@@ -21,13 +21,15 @@
             mapTypeId: google.maps.MapTypeId.HYBRID
         };
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-		sound1 = new google.maps.Marker({
-            position: ll,
-            map: map,
-            draggable: draggable,
-        });
-        google.maps.event.addListener(sound1, 'dragend', done);
-        google.maps.event.addListener(sound1, 'click', done);
+		if (draggable) {
+			sound1 = new google.maps.Marker({
+				position: ll,
+				map: map,
+				draggable: draggable,
+			});
+			google.maps.event.addListener(sound1, 'dragend', done);
+			google.maps.event.addListener(sound1, 'click', done);
+		}
     }
     
     function addNewMarker(lat, long, draggable){

@@ -1,51 +1,90 @@
-{% extends 'default.html' %}
+{% extends base_template %}
 {% block google_map %}
-    {% if piece.show_map == True %}
-	<div id="map_canvas" style="width:100%; height:100%">
-	</div>
-	{% endif %}
+{% if sound.show_map %}
+<div id="map_canvas" style="width:100%; height:100%">
+</div>
+<script type='text/javascript'>         
+                    	var lat = {{ sound.location.lat }};
+                    	var long = {{ sound.location.long }};
+                    	var ll = new google.maps.LatLng(lat, long);
+                    	myOptions = {
+                    		zoom: 24,
+                    		center: ll,
+                    		mapTypeId: google.maps.MapTypeId.HYBRID
+                    	};
+                    	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                    	sound1 = new google.maps.Marker({
+                    		position: ll,
+                    		map: map,
+                    		draggable: false,
+                    	});
+                    	{% if sound.use_street_view %}
+                    	var panoramaOptions = {
+                    	position: ll,
+                    	pov: {
+                    		heading: {{ sound.heading }},
+                    		pitch: {{ sound.pitch }},
+                    		zoom: {{ sound.zoom }}
+                    	}
+                    	};
+                    	var panorama = new  google.maps.StreetViewPanorama(document.getElementById("map_canvas"), panoramaOptions);
+                    	map.setStreetView(panorama);
+                    	{% endif %}
+                		activationCodeInit({{ sound.activation_code }}, "<iframe id='sound' class='hidden' controls='controls' src='{{ sound.sounds }}'></iframe>");
+</script>
+{% endif %}
 {% endblock %}
-        	{% block container %}
-        <script type='text/javascript'>         
-            		  initialize({{ sound.location.lat }},{{ sound.location.long }}, false);          
-                    
-        </script>
-        <div id='main'>
-            <div id='current'>
-                <iframe style='display:none;' src='{{ sound.sounds }}' controls='controls'>
-                    {{ s }}
-                </iframe>
-                <div class='info'>
-                	<div class='filler'></div>
-                    <div class='text'>
-                        <h2 style='font-style: italic;'>{{ sound }}</h2>
-                        <h3><span style='font-variant:small-caps; font-size: .9em;'>by:</span> {{ sound.artist }}</h3>
-                        <p>
-                            {{ sound.description }}
-                        </p>
-                    </div>
-                    {% if sound.default_image.thumb != None %}<img src='{{ sound.default_image.thumb }}'/>{% endif %}
-                </div>
+{% block container %}
+<div id='main'>
+    <div id='current'>
+        <div class='info'>
+            <div class='filler'>
             </div>
-            <!--
-            <div id='other-sounds'>
-            {% for s in sounds %}
-            <div>
-            <p>
-            {{ s }}
-            </p>
-            <iframe style='display:none;' src='{{ sound.sounds }}' controls='controls'>
-            {{ s }}
-            </iframe>
-            <div class='image'>
-            <h2>{{ sound }}</h2>
-            <img src='{{ sound.default_image.thumb }}'/>
-            <p>
-            {{ sound.description }}
-            </p>
+            <div class='text'>
+                <h2 style='font-style: italic;'>{{ sound }}</h2>
+                <h3><span style='font-variant:small-caps; font-size: .9em;'>by:</span> {{ sound.artist }}</h3>
+                <p>
+                    {{ sound.description }}
+                </p>
             </div>
-            </div>
-            {% endfor %}
-            </div>
-            !-->
-			{% endblock %}
+            {% if sound.default_image.thumb != None %}<img src='{{ sound.default_image.thumb }}'/>{% endif %}
+        </div>
+    </div>
+    <div class='activation'>
+        <div>
+            <h2 style='font-style: italic;'>Type in activation code to start audio:</h2>
+            <input id='activation_code' type='text' value='###'/>
+        </div>
+    </div>
+</div>{% endblock %}
+{% block edit_street %}
+{% if sound.use_street_view %}
+<script type='text/javascript'>
+    jQuery.event.add(window, 'load', function(){
+        google.maps.event.addListener(panorama, 'pov_changed', function(){
+            $('#id_heading').val(panorama.getPov().heading);
+            $('#id_pitch').val(panorama.getPov().pitch);
+            $('#id_zoom').val(panorama.getPov().zoom);
+        });
+        $('div.activation').remove();
+        $('#save-street').click(function(){
+            $.post('/save-street', $('#street_view > form').serialize(), function(data){
+                alert('saved your new street view');
+            });
+        });
+    });
+</script>
+<div id='street_view'>
+    <form name='street_view' method='post'>
+        {% csrf_token %}
+        {{ sound_form.title }}
+        {{ sound_form.heading }}
+        {{ sound_form.pitch }}
+        {{ sound_form.zoom }}
+    </form>
+    <button id='save-street'>
+        save street view
+    </button>
+</div>
+{% endif %}
+{% endblock %}

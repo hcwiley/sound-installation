@@ -33,7 +33,9 @@ urlpatterns += patterns('',
 
 urlpatterns += patterns('',
     (r'^add-piece$', 'views.add_piece'),
+    (r'^save-street$', 'views.save_street'),
     (r'^edit$', 'views.edit', {'page':'home'}),
+    (r'^edit/$', 'views.edit', {'page':'home'}),
     (r'^edit/(?P<page>.*)$', 'views.edit'),
     (r'^(?P<page>.*)$', 'views.default'), # make sure this is last as it will catch everything
 )
