@@ -4,35 +4,42 @@
 <div id="map_canvas" style="width:100%; height:100%">
 </div>
 <script type='text/javascript'>         
-                    	var lat = {{ sound.location.lat }};
-                    	var long = {{ sound.location.long }};
-                    	var ll = new google.maps.LatLng(lat, long);
-                    	myOptions = {
-                    		zoom: 24,
-                    		center: ll,
-                    		mapTypeId: google.maps.MapTypeId.HYBRID
-                    	};
-                    	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-                    	sound1 = new google.maps.Marker({
-                    		position: ll,
-                    		map: map,
-                    		draggable: false,
-                    	});
-                    	{% if sound.use_street_view %}
-                    	var panoramaOptions = {
-                    	position: ll,
-                    	pov: {
-                    		heading: {{ sound.heading }},
-                    		pitch: {{ sound.pitch }},
-                    		zoom: {{ sound.zoom }}
-                    	}
-                    	};
-                    	var panorama = new  google.maps.StreetViewPanorama(document.getElementById("map_canvas"), panoramaOptions);
-                    	map.setStreetView(panorama);
-                    	{% endif %}
-                		activationCodeInit({{ sound.activation_code }}, "<iframe id='sound' class='hidden' controls='controls' src='{{ sound.sounds }}'></iframe>");
+                            	var lat = {{ sound.location.lat }};
+                            	var long = {{ sound.location.long }};
+                            	var ll = new google.maps.LatLng(lat, long);
+        						{% if base_template  == 'edit.html' %}
+        						  var draggable = true;
+        						{% else %}
+        						  var draggable = false;
+        						{% endif %}
+                            	myOptions = {
+                            		zoom: 24,
+                            		center: ll,
+                            		mapTypeId: google.maps.MapTypeId.HYBRID
+                            	};
+                            	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                            	sound1 = new google.maps.Marker({
+                            		position: ll,
+                            		map: map,
+                            		draggable: draggable,
+                            	});
+                            	{% if sound.use_street_view %}
+                            	var panoramaOptions = {
+                            	position: ll,
+                            	pov: {
+                            		heading: {{ sound.heading }},
+                            		pitch: {{ sound.pitch }},
+                            		zoom: {{ sound.zoom }}
+                            	}
+                            	};
+                            	var panorama = new  google.maps.StreetViewPanorama(document.getElementById("map_canvas"), panoramaOptions);
+                            	map.setStreetView(panorama);
+								{% endif %}
 </script>
 {% endif %}
+<script type='text/javascript'>
+	activationCodeInit({{ sound.activation_code }}, "<iframe id='sound' class='hidden' controls='controls' src='{{ sound.sounds }}'></iframe>");
+</script>
 {% endblock %}
 {% block container %}
 <div id='main'>
@@ -42,7 +49,7 @@
             </div>
             <div class='text'>
                 <h2 style='font-style: italic;'>{{ sound }}</h2>
-                <h3><span style='font-variant:small-caps; font-size: .9em;'>by:</span> {{ sound.artist }}</h3>
+                <h3><span style='font-variant:small-caps; font-size: .9em;'>by:</span> {{ sound.artist.name }}</h3>
                 <p>
                     {{ sound.description }}
                 </p>
@@ -56,8 +63,45 @@
             <input id='activation_code' type='text' value='###'/>
         </div>
     </div>
-</div>{% endblock %}
+</div>
+{% if sound.use_street_view == False and sound.show_map == False %}
+    <div id='main-image'>
+    	{% if sound.default_image != None %}<img src='{{ sound.default_image }}'/>{% endif %}
+{% endif %}
+{% endblock %}
 {% block edit_street %}
+<script type='text/javascript'>
+	jQuery.event.add(window, 'load', function(){
+    $('#save-loc').click(function(){
+		if($('#street_view')){
+			$.post('/save-street', $('#street_view > form').serialize(), function(data){
+            });
+		}
+        $.post('/save-location', $('#location > form').serialize(), function(data){
+            alert('saved your new position');
+        });
+    });
+    function done(event){
+        $('#save-loc').removeClass('hidden');
+        $('#lat').val(event.latLng.Ma);
+        $('#long').val(event.latLng.Na);
+    }
+    google.maps.event.addListener(sound1, 'dragend', done);
+	});
+</script>
+<div id='activation-display'>
+    <div class='filler'>
+    </div>
+    <h3 style='color: #FFFFFF; z-index:15;'>activation code: {{ sound.activation_code }}</h3>
+</div>
+<div class='autoform' id='location'>
+    <form name='location_update' method='post'>
+        {% csrf_token %}<input name='pk' value='{{ sound.pk }}' type='text' class='hidden' /><input name='lat' id='lat' class='hidden' type='text' /><input name='long' id='long' class='hidden' type='text' /><input name='submit' type='submit' value='submit' class='submit'/>
+    </form>
+    <button class='hidden' id='save-loc'>
+        save new position
+    </button>
+</div>
 {% if sound.use_street_view %}
 <script type='text/javascript'>
     jQuery.event.add(window, 'load', function(){
@@ -72,9 +116,14 @@
                 alert('saved your new street view');
             });
         });
+	    google.maps.event.addListener(panorama, 'position_changed', function(){
+	        $('#save-loc').removeClass('hidden');
+	        $('#lat').val(panorama.getPosition().Ma);
+	        $('#long').val(panorama.getPosition().Na);
+        });
     });
 </script>
-<div id='street_view'>
+<div class='autoform' id='street_view'>
     <form name='street_view' method='post'>
         {% csrf_token %}
         {{ sound_form.title }}
@@ -82,7 +131,6 @@
         {{ sound_form.pitch }}
         {{ sound_form.zoom }}
     </form>
-	<h3>activation code: {{ sound.activation_code }}</h3>
     <button id='save-street'>
         save street view
     </button>

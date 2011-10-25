@@ -45,15 +45,27 @@ function init(){
         $('#main').prepend(incoming);
     });
     $('#activation_code').focus(function(){
+		if($('#activation_code').val() == '###'){
+			$('#activation_code').val('');
+		}
 		//console.log($('#activation_code').val());
         $(document).keypress(function(event){
-            if ($('#activation_code').val().match(activationCode)) {
+			if (event.which) {
+				var key = event.which - 48;
+			}
+			else {
+				var key = event.keyCode - 48;
+			}
+            if ($('#activation_code').val().match(activationCode) || ($('#activation_code').val()+key).match(activationCode)) {
 				$(document).unbind('keypress');
 				$('div.activation').remove();
 				var div = document.createElement('DIV');
 				$(div).html(frame);
                 $('#current').append(div);
             }
+			else{
+				$('#activation_code').addClass('wrong-code');
+			}
         });
     });
     if (loc == 'map') {

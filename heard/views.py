@@ -187,10 +187,29 @@ def save_street(request):
         raise Http404
     try:
         sound = Piece.objects.get(title=request.POST['title'])
-        print sound
         sound.heading = request.POST['heading']
         sound.pitch = request.POST['pitch']
         sound.zoom = request.POST['zoom']
+        sound.save()
+        return HttpResponse("big score")
+    except:
+        print 'bad form'
+        return HttpResponseNotFound("invalid form")
+    
+def save_location(request):
+    if request.method != "POST":
+        raise Http404
+    try:
+        sound = Piece.objects.get(pk=request.POST['pk'])
+        print sound
+        location = sound.location
+        print location
+        location.lat = request.POST['lat']
+        location.long = request.POST['long']
+        location.save()
+        print location
+        sound.location = location
+        print sound.location
         sound.save()
         return HttpResponse("big score")
     except:
