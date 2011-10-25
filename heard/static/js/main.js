@@ -1,4 +1,5 @@
 jQuery.event.add(window, 'load', init);
+jQuery.event.add(window, 'resize', resize);
 
 var loc;
 var cc = 0;
@@ -31,7 +32,21 @@ function jingleAnimate(id, x, y){
     }
 }
 
+function resize(){
+	var height = $(window).height();
+    var width = $(window).width();
+    if (width > height && $("#bg img").height() > height) {
+        $("#bg img").width(width);
+        $("#bg img").height('auto');
+    }
+    else {
+        $("#bg img").width('auto');
+        $("#bg img").height(height);
+    }
+}
+
 function init(){
+	resize();
     //Current page = loc
     loc = window.location + "";
     loc = loc.split('/');
@@ -62,6 +77,7 @@ function init(){
 				var div = document.createElement('DIV');
 				$(div).html(frame);
                 $('#current').append(div);
+				$('.fade').removeClass('fade');
             }
 			else{
 				$('#activation_code').addClass('wrong-code');
