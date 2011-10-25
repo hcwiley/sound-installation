@@ -10,6 +10,14 @@
         {% block google_map %}
         {% endblock %}
         <div id='container'>
+        	{% for artist in artists %}
+			{% if artist.user = user and artist.name == '' %}
+			<script type='text/javascript'>
+				alert("You don't have a name yet, you will automatically go to the screen to make one...");
+				window.location = "/admin/artist/artist/{{ artist.pk }}/";
+			</script>
+			{% endif %}
+			{% endfor %}	
             {% block container %}
             {% endblock %}
 			{% block edit_street %}

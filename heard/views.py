@@ -21,6 +21,7 @@ def edit(request, page):
                 'STATIC_URL' : settings.STATIC_URL,
                 'base_template' : "edit.html",
                 'artists' : Artist.objects.all(),
+                'user' : request.user,
                 'sounds' : Piece.objects.all(),
                 'sound' : piece,
                 'sound_form' : PieceForm(instance=piece),
@@ -37,6 +38,7 @@ def edit(request, page):
                     'STATIC_URL' : settings.STATIC_URL,
                     'base_template' : "edit.html",
                     'artists' : Artist.objects.all(),
+                    'user' : request.user,
                     'sounds' : Piece.objects.all(),
                     'piece_form' : PieceForm(),
                     'page': page
@@ -146,6 +148,8 @@ def add_piece(request):
         piece = Piece.objects.create()
         title = request.POST['title']
         piece.title = title
+        artist = Artist.objects.get_or_create(user=User.objects.get(username=request.user))[0]
+        piece.artist = artist
         if request.POST['description'] != '':
             description = request.POST['description']
             piece.description = description
@@ -154,7 +158,6 @@ def add_piece(request):
         loc.long = long
         loc.save()
         piece.location = loc
-        print piece.location
         if img != '':
             image = MyImage.objects.create(image=img)
             image.save()
@@ -163,14 +166,12 @@ def add_piece(request):
             sounds = Sound.objects.create(file=sound)
             sounds.save()
             piece.sounds = sounds
-        artist = Artist.objects.get(user=User.objects.get(username=request.user))
-        piece.artist = artist
         piece.save()
         piece = Piece.objects.get(title=title)
         page = 'sounds.html'
         args = {
             'STATIC_URL' : settings.STATIC_URL,
-            'base_template' : "default.html",
+            'base_template' : "edit.html",
             'artists' : Artist.objects.all(),
             'sounds' : Piece.objects.all(),
             'sound' : piece,
