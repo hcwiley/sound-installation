@@ -102,7 +102,6 @@ div.text {
     position: relative;
 	float: left;
 	opacity: 1;
-	left: 160px;
     top: -15px;
     color: #FFF;
     font-weight: 900;
@@ -114,7 +113,8 @@ div.text h2{
 }
 
 div.info > img {
-    position: absolute;
+    position: relative;
+	float: left;
 	opacity: .8;
     top: 0px;
     height: 150px;

@@ -19,4 +19,7 @@ class Artist(models.Model):
             self.name = '%s %s' % (self.user.first_name, self.user.last_name)
         super(Artist, self).save(*args, **kwargs)
 
-admin.site.register(Artist)
+class ArtistAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Artist
+admin.site.register(Artist,ArtistAdmin)
