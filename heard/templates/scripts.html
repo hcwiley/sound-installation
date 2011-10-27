@@ -21,10 +21,12 @@ if(window.location.hostname != 'blu-wired' || window.location.hostname != '127.0
 </script>
 <script type="text/javascript">
     function done(event){
-		console.log(event);
         $('#marker-feed-back').data('new', true);
-        $('#marker-feed-back').data('lat', event.latLng.Na);
-        $('#marker-feed-back').data('long', event.latLng.Oa);
+		var pos = sound1.getPosition();
+		var lat = pos.lat();
+		var long = pos.lng();
+        $('#marker-feed-back').data('lat', lat);
+        $('#marker-feed-back').data('long', long);
     }
     
     function initialize(lat, long, draggable){
