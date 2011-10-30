@@ -12,7 +12,7 @@ import random
 class MyImage(models.Model):
     image = models.ImageField(upload_to='gallery/')
     thumb = models.ImageField(upload_to='gallery/', blank=True, null=True, editable=False)
-    thumbsize = (50,50)
+    thumbsize = (250,250)
     
     class Meta:
         ordering = ['image']

@@ -19,7 +19,7 @@ div.info {
     top: 7px;
     left: 7px;
     z-index: 100;
-    width: 350px;
+    width: 380px;
 	min-height: 170px;
 	height: auto;
 	padding: 5px;
@@ -122,8 +122,8 @@ div.info > img {
 	float: left;
 	opacity: .8;
     top: 0px;
-    height: 150px;
-    width: 150px;
+    height: 170px;
+    width: 170px;
 	-moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     -khtml-border-radius: 10px;
@@ -282,10 +282,6 @@ input.hidden{
 div.info.mobile{
 	left: 5px;
 	width: 95%;
-}
-
-div.info.tablet{
-    left: 5px;
 }
 
 div.activation.mobile{
