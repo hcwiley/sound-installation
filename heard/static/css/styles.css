@@ -16,17 +16,18 @@ body {
 
 div.info {
 	position: fixed;
-    top: 10px;
-    left: 150px;
+    top: 7px;
+    left: 7px;
     z-index: 100;
     width: 350px;
+	min-height: 170px;
 	height: auto;
 	padding: 5px;
 }
 
 div.filler {
     background-color: #111;
-    opacity: .95;
+    opacity: 1;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     -khtml-border-radius: 10px;
@@ -107,6 +108,7 @@ div.text {
 	opacity: 1;
     top: -15px;
     color: #FFF;
+	width: 150px;
     font-weight: 900;
     margin-left: 10px;
 }
@@ -267,21 +269,27 @@ input.hidden{
     display: none;
 }
 
+#sound{
+	display: none;
+	opacity: 0;
+	z-index: -2; 
+}
+
 .hidden{
     display: none;
 }
 
 div.info.mobile{
-	left: 10px;
+	left: 5px;
 	width: 95%;
 }
 
 div.info.tablet{
-    left: 10px;
+    left: 5px;
 }
 
 div.activation.mobile{
-	left: 10px;
+	left: 5px;
 	height: 110px;
 	width: 300px;
 }

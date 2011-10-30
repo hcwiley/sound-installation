@@ -38,7 +38,7 @@
 </script>
 {% endif %}
 <script type='text/javascript'>
-	activationCodeInit({{ sound.activation_code }}, "<audio id='sound' class='hidden' controls='controls' autoplay='autoplay'><source src='{{ sound.sounds }}' type='audio/mpeg'/></audio>");
+	activationCodeInit({{ sound.activation_code }}, "");
 </script>
 {% endblock %}
 {% block container %}
@@ -57,6 +57,10 @@
             </div>
         </div>
     </div>
+	<div>
+		<audio id='sound' class='hidden' controls='controls' ><source src='{{ sound.sounds }}' type='audio/mpeg'/></audio>
+		<script type="text/javascript" src="http://mediaplayer.yahoo.com/js"></script>
+		</div>
     <div class='activation'>
         <div>
             <h2 style='font-style: italic;'>Type in activation code to start audio:</h2>

@@ -96,10 +96,8 @@ function init(){
             if ($('#activation_code').val().match(activationCode) || ($('#activation_code').val()+key).match(activationCode)) {
 				$(document).unbind('keypress');
 				$('div.activation').remove();
-				var div = document.createElement('DIV');
-				$(div).html(frame);
-                $('#current').append(div);
-				$('.fade').removeClass('fade');
+				var sound = document.getElementById('sound');
+				sound.play();
             }
 			else{
 				$('#activation_code').addClass('wrong-code');
