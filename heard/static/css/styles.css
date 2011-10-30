@@ -21,11 +21,12 @@ div.info {
     z-index: 100;
     width: 350px;
 	height: auto;
+	padding: 5px;
 }
 
 div.filler {
     background-color: #111;
-    opacity: .9;
+    opacity: .95;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     -khtml-border-radius: 10px;
@@ -102,7 +103,7 @@ div.autoform {
 
 div.text {
     position: relative;
-	float: left;
+	float: right;
 	opacity: 1;
     top: -15px;
     color: #FFF;
