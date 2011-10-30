@@ -9,6 +9,22 @@ var map;
 var sound;
 var activationCode = '';
 var frame = '';
+var isMobile = '';
+var isTablet = '';
+
+//Checking for mobile browser
+if (navigator.userAgent.match(/iPad/i) ||
+navigator.userAgent.match(/webOS/i) ||
+navigator.userAgent.match(/Android 3.1/i)){
+    isTablet = true;
+}
+//Checking for mobile browser
+else if (navigator.userAgent.match(/Android/i) ||
+navigator.userAgent.match(/iPhone/i) ||
+navigator.userAgent.match(/iPod/i)) {
+    isMobile = true;
+}
+
 function activationCodeInit(code, html){
     activationCode = code + '';
     frame = html;
@@ -46,6 +62,12 @@ function resize(){
 }
 
 function init(){
+	if(isTablet){
+		$('body').add($('div')).addClass('tablet');
+	}
+	if(isMobile){
+        $('body').add($('div')).addClass('mobile');
+    }
 	resize();
     //Current page = loc
     loc = window.location + "";

@@ -4,41 +4,41 @@
 <div id="map_canvas" class='fade' style="width:100%; height:100%">
 </div>
 <script type='text/javascript'>         
-                            	var lat = {{ sound.location.lat }};
-                            	var long = {{ sound.location.long }};
-                            	var ll = new google.maps.LatLng(lat, long);
-        						{% if base_template  == 'edit.html' %}
-        						  var draggable = true;
-        						{% else %}
-        						  var draggable = false;
-        						{% endif %}
-                            	myOptions = {
-                            		zoom: 24,
-                            		center: ll,
-                            		mapTypeId: google.maps.MapTypeId.HYBRID
-                            	};
-                            	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-                            	sound1 = new google.maps.Marker({
-                            		position: ll,
-                            		map: map,
-                            		draggable: draggable,
-                            	});
-                            	{% if sound.use_street_view %}
-                            	var panoramaOptions = {
-                            	position: ll,
-                            	pov: {
-                            		heading: {{ sound.heading }},
-                            		pitch: {{ sound.pitch }},
-                            		zoom: {{ sound.zoom }}
-                            	}
-                            	};
-                            	var panorama = new  google.maps.StreetViewPanorama(document.getElementById("map_canvas"), panoramaOptions);
-                            	map.setStreetView(panorama);
-								{% endif %}
+	var lat = {{ sound.location.lat }};
+	var long = {{ sound.location.long }};
+	var ll = new google.maps.LatLng(lat, long);
+	{% if base_template  == 'edit.html' %}
+		  var draggable = true;
+	{% else %}
+		  var draggable = false;
+	{% endif %}
+    	myOptions = {
+    		zoom: 24,
+    		center: ll,
+    		mapTypeId: google.maps.MapTypeId.HYBRID
+    	};
+    	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    	sound1 = new google.maps.Marker({
+    		position: ll,
+    		map: map,
+    		draggable: draggable,
+    	});
+   	{% if sound.use_street_view %}
+    	var panoramaOptions = {
+    	position: ll,
+    	pov: {
+    		heading: {{ sound.heading }},
+    		pitch: {{ sound.pitch }},
+    		zoom: {{ sound.zoom }}
+    	}
+    	};
+    	var panorama = new  google.maps.StreetViewPanorama(document.getElementById("map_canvas"), panoramaOptions);
+    	map.setStreetView(panorama);
+    {% endif %}
 </script>
 {% endif %}
 <script type='text/javascript'>
-	activationCodeInit({{ sound.activation_code }}, "<iframe id='sound' class='hidden' controls='controls' src='{{ sound.sounds }}'></iframe>");
+	activationCodeInit({{ sound.activation_code }}, "<audio id='sound' class='hidden' controls='controls' autoplay='autoplay'><source src='{{ sound.sounds }}' type='audio/mpeg'/></audio>");
 </script>
 {% endblock %}
 {% block container %}
@@ -66,9 +66,9 @@
 </div>
 {% if not sound.use_street_view and not sound.show_map %}
     <div id='bg'>
-    	<img src='/site_media/media/gallery/raina.png' />
-    	{% if sound.default_image != None %}<img src='{{ sound.default_image }}'/>{% endif %}
-	</div>
+        <img src='/site_media/media/gallery/raina.png' />
+        {% if sound.default_image != None %}<img src='{{ sound.default_image }}'/>{% endif %}
+    </div>
 {% endif %}
 {% endblock %}
 {% block edit_street %}

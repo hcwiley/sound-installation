@@ -66,7 +66,7 @@ class Piece(models.Model):
     heading = models.FloatField(default=180.0)
     pitch = models.FloatField(default=0.0)
     zoom = models.FloatField(default=1)
-    activation_code = models.CharField(max_length=3, default='000', editable=False)
+    activation_code = models.CharField(max_length=3, default='000', editable=False, help_text='This what you must type in start audio')
     
     def __unicode__(self):
         return self.title
@@ -76,6 +76,10 @@ class Piece(models.Model):
         if self.activation_code == '000' or self.activation_code == '0':
             self.activation_code = '%s%s%s' % (random.randint(0,9),random.randint(0,9),random.randint(0,9))
         super(Piece, self).save(*args, **kwargs)
+        
+class PieceAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Piece
     
 class PieceForm(forms.ModelForm):
     default_image = forms.ImageField(widget=forms.FileInput(), required=False)
@@ -86,4 +90,4 @@ class PieceForm(forms.ModelForm):
 admin.site.register(MyImage)
 admin.site.register(Sound)
 admin.site.register(Location)
-admin.site.register(Piece)
+admin.site.register(Piece, PieceAdmin)

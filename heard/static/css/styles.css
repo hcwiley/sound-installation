@@ -57,8 +57,9 @@ div.activation {
     top: 35%;
     left: 35%;
     z-index: 100;
-    width: 400px;
-    height: 80px;
+    width: auto;
+    height: auto;
+	padding: 10px;
     opacity: 1;
 	background-color: #CCC;
     opacity: .9;
@@ -265,11 +266,21 @@ input.hidden{
     display: none;
 }
 
-.fade{
-	
-}
-
-
 .hidden{
     display: none;
+}
+
+div.info.mobile{
+	left: 10px;
+	width: 95%;
+}
+
+div.info.tablet{
+    left: 10px;
+}
+
+div.activation.mobile{
+	left: 10px;
+	height: 110px;
+	width: 300px;
 }
