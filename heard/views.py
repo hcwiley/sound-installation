@@ -55,9 +55,12 @@ def edit(request, page):
         return render_to_response('not-logged-in.html', args)
 
 def default(request, page):
-    tmp = int(page)
+    try:
+        tmp = int(page)
+    except:
+        tmp = -1
     if len(Piece.objects.filter(slug = page)) != 0 or (len(Piece.objects.filter(pk = tmp)) != 0 if type(tmp) == type(1) else False):
-        print 'its a piece page some how'
+        #print 'its a piece page some how'
         piece = Piece.objects.filter(slug = page)[0] if len(Piece.objects.filter(slug = page)) > 0 else Piece.objects.filter(pk = tmp)[0]  
         page = 'sounds.html'
         args = {

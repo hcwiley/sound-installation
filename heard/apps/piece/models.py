@@ -69,7 +69,7 @@ class Piece(models.Model):
     activation_code = models.CharField(max_length=3, default='000', editable=False, help_text='This what you must type in start audio')
     
     def __unicode__(self):
-        return self.title
+        return '%s: , #:%d, code:%s' % (self.title, self.pk, self.activation_code)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)

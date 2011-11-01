@@ -49,7 +49,7 @@
             </div>
 			{% if sound.default_image.thumb != None %}<img src='{{ sound.default_image.thumb }}'/>{% endif %}
             <div class='text'>
-                <h2 style='font-style: italic;'>{{ sound }}</h2>
+                <h2 style='font-style: italic;'>{{ sound.title }}</h2>
                 <h3><span style='font-variant:small-caps; font-size: .9em;'>by:</span> {{ sound.artist.name }}</h3>
                 <p>
                     {{ sound.description }}
