@@ -39,4 +39,5 @@ urlpatterns += patterns('',
     (r'^edit/$', 'views.edit', {'page':'home'}),
     (r'^edit/(?P<page>.*)$', 'views.edit'),
     (r'^(?P<page>.*)$', 'views.default'), # make sure this is last as it will catch everything
+    #(r'^(?P<page>d*)$', 'views.default'),
 )
