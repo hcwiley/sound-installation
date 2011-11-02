@@ -341,9 +341,33 @@ input.hidden{
     display: none;
 }
 
+#header.mobile{
+	top: 2px;
+	left: 2px;
+}
+
+#header.mobile h1{
+	font-size: 16px;
+}
+
+#welcome-popup.mobile{
+	left: 1%;
+	width: 92%;
+	top: 10%;
+}
+
+#logo.mobile{
+	width: 60px;
+	height: 60px;
+}
+
 div.info.mobile{
 	left: 5px;
 	width: 95%;
+}
+
+div.info.mobile img{
+	display: none;
 }
 
 div.activation.mobile{

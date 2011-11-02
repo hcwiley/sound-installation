@@ -122,8 +122,10 @@ function init(){
 	});
 	$('#activation_code').unbind('focus');
     $('#activation_code').focus(function(){
+		$('#activation_code').focus();
         if ($('#activation_code').val() == '###') {
             $('#activation_code').val('');
+			$('#activation_code').focus();
         }
         //console.log($('#activation_code').val());
         $(document).keypress(function(event){
