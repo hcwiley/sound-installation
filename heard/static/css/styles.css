@@ -33,6 +33,10 @@ div.info {
 	padding: 0px 20px;
 }
 
+#header:hover{
+	cursor: pointer;
+}
+
 #header h1{
 	color: #FFF;
 	font-weight: 500;

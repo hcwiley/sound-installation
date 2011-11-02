@@ -95,8 +95,19 @@ function init(){
 		$('#welcome-popup').animate({
 			opacity: 0,
 		}, 300);
-		window.setTimeout($('#welcome-popup').remove(), 300);
+		window.setTimeout("$('#welcome-popup').css('z-index','-2');", 300);
 	});
+	$('#header').bind('click',function(){
+		if ($('#welcome-popup').css('opacity') < .8) {
+			$('#welcome-popup').animate({
+				opacity: 1,
+			}, 300);
+			window.setTimeout("$('#welcome-popup').css('z-index','10');", 300);
+		}
+		else{
+			$('#close-welcome').trigger('click');
+		}
+    });
 	$('#activation_code').animate({
 		opacity: 1
 	}, 300);
