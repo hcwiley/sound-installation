@@ -25,30 +25,6 @@ navigator.userAgent.match(/iPod/i)) {
     isMobile = true;
 }
 
-$('#activation_code').focus(function(){
-    if ($('#activation_code').val() == '###') {
-        $('#activation_code').val('');
-    }
-    //console.log($('#activation_code').val());
-    $(document).keypress(function(event){
-        if (event.which) {
-            var key = event.which - 48;
-        }
-        else {
-            var key = event.keyCode - 48;
-        }
-        if ($('#activation_code').val().match(activationCode) || ($('#activation_code').val() + key).match(activationCode)) {
-            $(document).unbind('keypress');
-            $('div.activation').remove();
-            var sound = document.getElementById('sound');
-            sound.play();
-        }
-        else {
-            $('#activation_code').addClass('wrong-code');
-        }
-    });
-});
-
 function activationCodeInit(code, html){
     activationCode = code + '';
     frame = html;
@@ -119,13 +95,14 @@ function init(){
 		$('#welcome-popup').animate({
 			opacity: 0,
 		}, 300);
+		window.setTimeout($('#welcome-popup').remove(), 300);
 	});
-	$('#activation_code').unbind('focus');
+	$('#activation_code').animate({
+		opacity: 1
+	}, 300);
     $('#activation_code').focus(function(){
-		$('#activation_code').focus();
         if ($('#activation_code').val() == '###') {
             $('#activation_code').val('');
-			$('#activation_code').focus();
         }
         //console.log($('#activation_code').val());
         $(document).keypress(function(event){

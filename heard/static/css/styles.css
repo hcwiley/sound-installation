@@ -102,6 +102,10 @@ div.filler {
 	z-index: -1;
 }
 
+#activation_code{
+	opacity: 0;
+}
+
 #activation-display{
 	position: absolute;
 	left: 520px;
@@ -365,7 +369,10 @@ div.info.mobile{
 	left: 5px;
 	width: 95%;
 }
-
+div.text.mobile{
+    float: left;
+    width: 100%;
+}
 div.info.mobile img{
 	display: none;
 }
