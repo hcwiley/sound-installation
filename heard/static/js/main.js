@@ -15,7 +15,7 @@ var isTablet = '';
 //Checking for mobile browser
 if (navigator.userAgent.match(/iPad/i) ||
 navigator.userAgent.match(/webOS/i) ||
-navigator.userAgent.match(/Android 3.1/i)){
+navigator.userAgent.match(/Android 3.1/i)) {
     isTablet = true;
 }
 //Checking for mobile browser
@@ -24,6 +24,30 @@ navigator.userAgent.match(/iPhone/i) ||
 navigator.userAgent.match(/iPod/i)) {
     isMobile = true;
 }
+
+$('#activation_code').focus(function(){
+    if ($('#activation_code').val() == '###') {
+        $('#activation_code').val('');
+    }
+    //console.log($('#activation_code').val());
+    $(document).keypress(function(event){
+        if (event.which) {
+            var key = event.which - 48;
+        }
+        else {
+            var key = event.keyCode - 48;
+        }
+        if ($('#activation_code').val().match(activationCode) || ($('#activation_code').val() + key).match(activationCode)) {
+            $(document).unbind('keypress');
+            $('div.activation').remove();
+            var sound = document.getElementById('sound');
+            sound.play();
+        }
+        else {
+            $('#activation_code').addClass('wrong-code');
+        }
+    });
+});
 
 function activationCodeInit(code, html){
     activationCode = code + '';
@@ -49,7 +73,7 @@ function jingleAnimate(id, x, y){
 }
 
 function resize(){
-	var height = $(window).height();
+    var height = $(window).height();
     var width = $(window).width();
     if (width > height && $("#bg img").height() > height) {
         $("#bg img").width(width);
@@ -61,14 +85,24 @@ function resize(){
     }
 }
 
-function init(){
-	if(isTablet){
-		$('body').add($('div')).addClass('tablet');
+function getCookie(){
+	if (document.cookie.match('foobar')) {
+		return true;
 	}
-	if(isMobile){
+	else {
+		document.cookie = 'foobar';
+		return false;
+	}
+}
+
+function init(){
+    if (isTablet) {
+        $('body').add($('div')).addClass('tablet');
+    }
+    if (isMobile) {
         $('body').add($('div')).addClass('mobile');
     }
-	resize();
+    resize();
     //Current page = loc
     loc = window.location + "";
     loc = loc.split('/');
@@ -81,29 +115,38 @@ function init(){
         $(incoming).attr('id', 'current');
         $('#main').prepend(incoming);
     });
+	$('#close-welcome').bind('click',function(){
+		$('#welcome-popup').animate({
+			opacity: 0,
+		}, 300);
+	});
+	$('#activation_code').unbind('focus');
     $('#activation_code').focus(function(){
-		if($('#activation_code').val() == '###'){
-			$('#activation_code').val('');
-		}
-		//console.log($('#activation_code').val());
+        if ($('#activation_code').val() == '###') {
+            $('#activation_code').val('');
+        }
+        //console.log($('#activation_code').val());
         $(document).keypress(function(event){
-			if (event.which) {
-				var key = event.which - 48;
-			}
-			else {
-				var key = event.keyCode - 48;
-			}
-            if ($('#activation_code').val().match(activationCode) || ($('#activation_code').val()+key).match(activationCode)) {
-				$(document).unbind('keypress');
-				$('div.activation').remove();
-				var sound = document.getElementById('sound');
-				sound.play();
+            if (event.which) {
+                var key = event.which - 48;
             }
-			else{
-				$('#activation_code').addClass('wrong-code');
-			}
+            else {
+                var key = event.keyCode - 48;
+            }
+            if ($('#activation_code').val().match(activationCode) || ($('#activation_code').val() + key).match(activationCode)) {
+                $(document).unbind('keypress');
+                $('div.activation').remove();
+                var sound = document.getElementById('sound');
+                sound.play();
+            }
+            else {
+                $('#activation_code').addClass('wrong-code');
+            }
         });
     });
+	if(getCookie()){
+        $('#close-welcome').trigger('click');
+    }
     if (loc == 'map') {
         $(document).mouseup(function(event){
             if ($('#marker-feed-back').data('new')) {
