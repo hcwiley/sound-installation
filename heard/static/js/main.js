@@ -73,7 +73,14 @@ function getCookie(){
 
 function init(){
     if (isTablet) {
-        $('body').add($('div')).addClass('tablet');
+		var width = $(window).width();
+	    var height = $(window).height();
+		if((width > height && width < 1000) || (height > width) && height < 1000){
+			isTablet = false;
+			isMobile = true;
+		}
+		else
+            $('body').add($('div')).addClass('tablet');
     }
     if (isMobile) {
         $('body').add($('div')).addClass('mobile');
