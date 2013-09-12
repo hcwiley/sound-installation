@@ -50,8 +50,11 @@ div.info {
 	z-index: 10;
 	height: 120px;
 	width: 120px;
-	border: 5px solid #FFF;
 	overflow: hidden;
+    opacity: .4;
+}
+#logo:hover{
+    opacity: 1;
 }
 
 #logo img{
