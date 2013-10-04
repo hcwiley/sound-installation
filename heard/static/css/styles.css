@@ -9,6 +9,15 @@ body {
 	overflow: hidden;
 }
 
+
+*{
+  font-family: "Helvetica", sans-serif;
+}
+
+a{
+  text-decoration: none;
+}
+
 #map_canvas {
     height: 100%;
 	width: 100%;
@@ -42,26 +51,57 @@ div.info {
 	font-weight: 500;
 	font-size: 40px;
 }
+#header p{
+  color: #fff;
+  font-size: 15px;
+}
+#home-logo{
+	position: fixed;
+	top: 20px;
+	z-index: 10;
+	padding: 0px 20px;
+  right: 20px;
+  left: auto;
+}
+#home-logo h1{
+	color: #FFF;
+	font-weight: 500;
+	font-size: 20px;
+}
+#home-logo p{
+  color: #fff;
+  font-size: 10px;
+}
 
 #logo{
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
 	z-index: 10;
-	height: 120px;
-	width: 120px;
+	height: 60px;
+	width: 60px;
 	overflow: hidden;
-    opacity: .4;
+  background: rgba(255,255,255, .9);
 }
 #logo:hover{
     opacity: 1;
 }
 
 #logo img{
-	margin-top: -2px;
-	height: 105%;
-    width: 105%;
+	margin-top: 0px;
+	height: 100%;
+  width: auto;
 }
+#logo p{
+  position: absolute;
+  top: 13px;
+  z-index: 10;
+  font-size: 11px;
+  -webkit-transform: rotate(90deg);
+  right: -10px;
+  color: #2A3F42;
+}
+
 
 #welcome-popup{
 	display: block;
@@ -388,4 +428,15 @@ div.activation.mobile{
 	left: 5px;
 	height: 110px;
 	width: 300px;
+}
+#play-audio{
+  background-color: #006633;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 5px 20px;
+}
+.hidden{
+  display: none;
 }

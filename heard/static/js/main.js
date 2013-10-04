@@ -118,6 +118,12 @@ function init(){
 	$('#activation_code').animate({
 		opacity: 1
 	}, 300);
+    $("#play-audio").click(function(){
+      $('div.activation').hide(400).remove();
+      var sound = document.getElementById('sound');
+      sound.play();
+    });
+    /*
     $('#activation_code').focus(function(){
         if ($('#activation_code').val() == '###') {
             $('#activation_code').val('');
@@ -141,6 +147,7 @@ function init(){
             }
         });
     });
+  */
 	if(getCookie()){
         $('#close-welcome').trigger('click');
     }
