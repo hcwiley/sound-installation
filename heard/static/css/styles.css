@@ -198,7 +198,7 @@ div.activation > div > *{
 
 div.autoform {
 	position: absolute;
-	right: 5px;
+	right: 255px;
 	top: 20px;
 	z-index: 5;
 }
