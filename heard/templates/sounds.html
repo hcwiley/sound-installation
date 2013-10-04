@@ -95,11 +95,11 @@
 	});
 </script>
 <div id='activation-display'>
-    <div style="height: 100px;" class='filler'>
+    <div style="height: 140px;" class='filler'>
     </div>
     <h3 style='color: #FFFFFF; z-index:15;'>activation code: {{ sound.activation_code }}</h3>
 	<h3 style='color: #FFFFFF; z-index:15;'>number: {{ sound.pk }}</h3>
-  <a href='/admin/piece/piece/{{sound.pk}}'> edit in admin </a>
+  <a href='/admin/piece/piece/{{sound.pk}}/' style='color:#fff;'> edit in admin </a>
 </div>
 <div class='autoform' id='location'>
     <form name='location_update' method='post'>
